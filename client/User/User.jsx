@@ -2,7 +2,7 @@ import React from 'react';
 
 const User = () => (
   <>
-    <h2>Bandmates</h2>
+    <h2>User</h2>
   </>
 );
 
