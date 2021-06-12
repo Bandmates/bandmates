@@ -5,6 +5,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
@@ -43,7 +44,8 @@ module.exports = {
       '.jsx'
     ],
   },
-  // devServer: {
+  devServer: {
+    historyApiFallback: true,
   //   host: 'localhost',
   //   port: 8080,
   //   hot: true,
@@ -52,5 +54,5 @@ module.exports = {
   //     // '/messages': 'http://localhost:3000',
   //     // '/**': 'http://localhost:3000',
   //   },
-  // },
+  },
 };
