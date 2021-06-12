@@ -20,9 +20,13 @@ const Search = () => {
 
   const handleChange = e => {
     e.preventDefault();
-    const { name, target } = e.target.value;
+    let { name, value } = e.target;
+
+    if (name === 'gender') value = !shouldExcludeMen;
+
     const updateState = labelToSetState[name];
-    updateState(target);
+    updateState(value);
+    console.log(name, value);
   };
 
   const handleSearch = e => {
@@ -43,6 +47,7 @@ const Search = () => {
     //   .catch(err => console.log(err));
   };
 
+  //TODO: fix checkbox input
   return (
     <>
       <h2>Search</h2>
@@ -69,7 +74,11 @@ const Search = () => {
               </select>
             </label><br/>
             <label for="genre">Choose a genres:
-              <select id="genre" name="genre">
+              <select
+                id="genre"
+                name="genre"
+                onChange={handleChange}
+              >
                 <option value="rock">Rock</option>
                 <option value="punk">Punk</option>
                 <option value="metal">Metal</option>
@@ -84,16 +93,30 @@ const Search = () => {
               </select>
             </label><br/>
             <label for="skill">Skill level:
-              <select id="skill" name="skill">
+              <select
+                id="skill"
+                name="skill"
+                onChange={handleChange}
+              >
                 <option value="amateur">Amateur</option>
                 <option value="professional">Professional</option>
               </select>
             </label><br/>
             <label>Location:
-              <input type="text" name="location" placeholder="NYC, LA, Outer space" />
+              <input
+                type="text"
+                name="location"
+                placeholder="NYC, LA, Outer space"
+                onChange={handleChange}
+              />
             </label><br/>
             <label>Only show non-men
-              <input type="checkbox" id="gender" name="gender" />
+              <input
+                type="checkbox"
+                id="gender"
+                name="gender"
+                onChange={handleChange}
+              />
             </label><br/>
             <input type="submit" value="Search" />
           </form>

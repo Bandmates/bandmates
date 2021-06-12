@@ -8,10 +8,10 @@ import LogIn from './LogIn/LogIn';
 const App = () => (
   <>
     <h1>Bandmates</h1>
-    <User />
-    <Search />
+    {/* <User /> */}
+    {/* <Search /> */}
     <SignUp />
-    <LogIn />
+    {/* <LogIn /> */}
   </>
 );
 
