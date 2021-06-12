@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const User = () => {
+const User = ({ id }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {

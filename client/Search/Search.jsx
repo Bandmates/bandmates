@@ -2,17 +2,45 @@ import React, { useState } from 'react';
 
 import SearchResult from './SearchResult';
 
-const AGES = [];
-
-for (let i = 18; i < 100; i++) {
-  AGES.push(i);
-}
-
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
+  const [instrument, setInstrument] = useState('vocals');
+  const [genre, setGenre] = useState('rock');
+  const [skill, setSkill] = useState('amateur');
+  const [location, setLocation] = useState('');
+  const [shouldExcludeMen, setShouldExcludeMen] = useState(false);
+
+  const labelToSetState = {
+    instruments: setInstrument,
+    genre: setGenre,
+    skill: setSkill,
+    gender: setShouldExcludeMen,
+    location: setLocation,
+  };
+
+  const handleChange = e => {
+    e.preventDefault();
+    const { name, target } = e.target.value;
+    const updateState = labelToSetState[name];
+    updateState(target);
+  };
 
   const handleSearch = e => {
+    e.preventDefault();
 
+    const filters = {
+      instrument,
+      genre,
+      skill,
+      location,
+      shouldExcludeMen,
+    };
+
+    //TODO: add query string to fetch, connect query to backend
+    // fetch('/users')
+    //   .then(res => res.json())
+    //   .then(data => setSearchResults(data))
+    //   .catch(err => console.log(err));
   };
 
   return (
@@ -23,7 +51,11 @@ const Search = () => {
           Search for musicians with whom to jam
           <form onSubmit={handleSearch}>
             <label for="instruments">Choose an instrument:
-              <select id="instruments" name="instruments">
+              <select
+                id="instruments"
+                name="instruments"
+                onChange={handleChange}
+              >
                 <option value="vocals">Vocals</option>
                 <option value="guitar">Guitar</option>
                 <option value="bass">Bass</option>
@@ -55,25 +87,6 @@ const Search = () => {
               <select id="skill" name="skill">
                 <option value="amateur">Amateur</option>
                 <option value="professional">Professional</option>
-              </select>
-            </label><br/>
-            <label for="minAge">Be older than:
-              <select id="minAge" name="minAge">
-                {AGES.map((age, i) => (
-                  <option value={age}>{age}</option>
-                ))}
-              </select>
-            </label><br/>
-            <label for="maxAge">...but younger than (sorry, grandpa):
-              <select id="maxAge" name="maxAge">
-                {AGES.map((age, i) => (
-                  <option
-                    value={age}
-                    selected={age === 99}
-                  >
-                    {age}
-                  </option>
-                ))}
               </select>
             </label><br/>
             <label>Location:
