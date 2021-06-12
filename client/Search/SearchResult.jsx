@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: link to profile
 const SearchResult = ({
   id,
   username,
