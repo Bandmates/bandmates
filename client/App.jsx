@@ -4,14 +4,16 @@ import User from './User/User';
 import Search from './Search/Search';
 import SignUp from './SignUp/SignUp';
 import LogIn from './LogIn/LogIn';
+import NavBar from './NavBar/NavBar';
 
 const App = () => (
   <>
     <h1>Bandmates</h1>
-    {/* <User /> */}
-    {/* <Search /> */}
+    <NavBar />
+    <User />
+    <Search />
     <SignUp />
-    {/* <LogIn /> */}
+    <LogIn />
   </>
 );
 
