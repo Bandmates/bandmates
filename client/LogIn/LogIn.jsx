@@ -14,7 +14,9 @@ const LogIn = () => {
   return (
     <>
       {errors && (
-        <div>{errors}</div>
+        <div>
+          {errors}
+        </div>
       )}
       <label>
         Log in
@@ -32,7 +34,10 @@ const LogIn = () => {
             name="password"
             placeholder="SickPassword420"
           />
-          <input type="submit" value="Log In"/>
+          <input
+            type="submit"
+            value="Log In"
+          />
         </form>
       </label>
     </>
