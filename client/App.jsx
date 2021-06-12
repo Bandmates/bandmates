@@ -5,7 +5,6 @@ import User from './User/User';
 import Search from './Search/Search';
 import SignUp from './SignUp/SignUp';
 import LogIn from './LogIn/LogIn';
-import NavBar from './NavBar/NavBar';
 
 const App = () => (
   <Router>
@@ -14,7 +13,8 @@ const App = () => (
       <Route path="/" exact component={LogIn}/>
       <Route path="/logIn" component={LogIn}/>
       <Route path="/signUp" component={SignUp}/>
-      <Route path="/users" component={Search}/>
+      <Route path="/users" exact component={Search}/>
+      <Route path="/users/:id" component={User}/>
     </Switch>
   </Router>
 );

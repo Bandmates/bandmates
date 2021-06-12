@@ -34,6 +34,7 @@ const User = ({ id }) => {
 
   return (
     <>
+      <h1>USER PROFILE</h1>
       <div>{username}</div>
       <div>{instruments}</div>
       <div>{genres}</div>
