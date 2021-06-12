@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import NavBar from '../NavBar/NavBar';
+
 const User = ({ id }) => {
   const [user, setUser] = useState(null);
 
@@ -14,9 +16,12 @@ const User = ({ id }) => {
 
   if (!user) {
     return (
-      <div>
-        Loading user ...
-      </div>
+      <>
+        <NavBar />
+        <div>
+          Loading user ...
+        </div>
+      </>
     )
   }
 
@@ -34,6 +39,7 @@ const User = ({ id }) => {
 
   return (
     <>
+      <NavBar />
       <h1>USER PROFILE</h1>
       <div>{username}</div>
       <div>{instruments}</div>

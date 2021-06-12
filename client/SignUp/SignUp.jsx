@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const AGES = [];
 
@@ -64,6 +65,12 @@ const SignUp = () => {
       {errors && (
         <div>{errors}</div>
       )}
+      <Link to="/logIn">
+        <button>
+          Already have an account?
+          Click here to log in.
+        </button>
+      </Link>
       <div id="searchForm">
         <label>
           Create an account and find some bandmates!

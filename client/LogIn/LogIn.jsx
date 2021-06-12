@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LogIn = () => {
   const [errors, setErrors] = useState('');
@@ -40,6 +41,12 @@ const LogIn = () => {
           />
         </form>
       </label>
+      <Link to="/signUp">
+        <button>
+          Don't have an account?
+          Click here to sign up.
+        </button>
+      </Link>
     </>
   )
 };
