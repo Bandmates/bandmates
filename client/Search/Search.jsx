@@ -103,7 +103,7 @@ const Search = () => {
         searchResults.map((result, i) => (
           <SearchResult
             key={`searchResult${i}`}
-            user={result}
+            {...result}
           />
         ))
       : (

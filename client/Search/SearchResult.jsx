@@ -1,9 +1,23 @@
 import React from 'react';
 
-const SearchResult = () => (
-  <>
-    <h2>SearchResult</h2>
-  </>
+const SearchResult = ({
+  id,
+  username,
+  age,
+  location,
+  instruments,
+  skillLevel,
+  genres,
+}) => (
+  <div>
+    <div>{username}</div>
+    <div>{location}</div>
+    <div>{age}</div>
+    <div>{skillLevel}</div>
+    <div>{instruments}</div>
+    <div>{genres}</div>
+    <a>Link to profile</a>
+  </div>
 );
 
 export default SearchResult;
