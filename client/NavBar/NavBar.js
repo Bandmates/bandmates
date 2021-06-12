@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
+// TODO: change log out to actually log out a user
 const NavBar = ({ id, username }) => {
   return (
     <div>
@@ -7,13 +9,13 @@ const NavBar = ({ id, username }) => {
         Hello, {username}!
       </div>
       <div>
-        <a>View profile</a>
+        <Link to={`/users/${id}`}>View profile</Link>
       </div>
       <div>
-        <a>Search musicians</a>
+        <Link to="/users">Search musicians</Link>
       </div>
       <div>
-        <a>Log out</a>
+        <Link to="/logIn">Log out</Link>
       </div>
     </div>
   )

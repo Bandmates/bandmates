@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import SearchResult from './SearchResult';
+import NavBar from '../NavBar/NavBar';
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -50,6 +51,7 @@ const Search = () => {
   //TODO: fix checkbox input
   return (
     <>
+      <NavBar />
       <h2>Search</h2>
       <div id="searchForm">
         <label>
