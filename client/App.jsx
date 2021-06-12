@@ -8,7 +8,6 @@ import LogIn from './LogIn/LogIn';
 
 const App = () => (
   <Router>
-    <h1>Bandmates</h1>
     <Switch>
       <Route path="/" exact component={LogIn}/>
       <Route path="/logIn" component={LogIn}/>

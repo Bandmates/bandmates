@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 
 import App from './App';
 
-// import stylesheet from './styles/app.css';
+import stylesheet from './styles/app.css';
 
 render(
   <div>

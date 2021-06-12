@@ -76,3 +76,69 @@ select {
 }
 
 /* END OF CSS RESET */
+
+body {
+  font-family: Arial, sans-serif;
+  color: #191919;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  color: #767676;
+}
+
+.signUpAndLogIn {
+  /* display: flex;
+  justify-content: center;
+  position: relative;
+  top: 40vh; */
+  /* background-image: url("https://wallpaperaccess.com/full/2116674.jpg"); */
+  background-image: url("https://giffiles.alphacoders.com/524/52425.gif");
+  /* background-image: url("https://wallpaperaccess.com/full/1323873.jpg"); */
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginFields {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 6px;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+}
+
+#signUpContainer {
+  padding: 36px;
+  background: rgba(255,255,255, 0.9);
+  border-radius: 6px;
+  border: 5px transparent grey;
+  transition: all 1s;
+}
+
+#signUpContainer:hover {
+  padding: 48px;
+}
+
+input {
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  color: #767676;
+}
+
+button {
+  border: none;
+  color: #767676;
+}
+
+#signUpForm {
+  margin-top: 12px;
+}
+
+form > label {
+  color: #767676;
+}
