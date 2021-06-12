@@ -60,126 +60,123 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <h2>Sign Up</h2>
-      {errors && (
-        <div>{errors}</div>
-      )}
-      <Link to="/logIn">
-        <button>
-          Already have an account?
-          Click here to log in.
-        </button>
-      </Link>
-      <div id="searchForm">
-        <label>
-          Create an account and find some bandmates!
-          <form onSubmit={handleSubmit}>
-            <label for="username">
-              Username:
+    <div className="signUpAndLogIn">
+      <div id="signUpContainer">
+        <h1>Sign Up</h1>
+        {errors && (
+          <div>{errors}</div>
+        )}
+        <div>Create an account and find some bandmates!</div>
+        <Link to="/logIn">
+          <button className="loginFields">
+            Already have an account?
+            Click here to log in.
+          </button>
+        </Link>
+        <div id="signUpForm">
+          <label>
+            <form onSubmit={handleSubmit}>
               <input
+                className="loginFields"
                 type="text"
                 id="username"
                 name="username"
+                placeholder="Username"
+                onChange={handleChange}
+              />
+              <input
+                className="loginFields"
+                type="text"
+                id="gmail"
+                name="gmail"
                 placeholder="kenny@loggins.com"
                 onChange={handleChange}
               />
-            </label>
-            <br/>
-            <label for="password">
-              Password:
               <input
+                className="loginFields"
                 type="password"
                 id="password"
                 name="password"
                 placeholder="SickPassword420"
                 onChange={handleChange}
               />
-            </label>
-            <br/>
-            <label for="instruments">
-              Choose an instrument:
-              <select
-                id="instruments"
-                name="instruments"
-                onChange={handleChange}
-                multiple
-              >
-                <option value="vocals">Vocals</option>
-                <option value="guitar">Guitar</option>
-                <option value="bass">Bass</option>
-                <option value="drum">Drums</option>
-                <option value="piano">Piano</option>
-                <option value="synth">Keyboard / Synth</option>
-                <option value="drumMachine">Drum Machine</option>
-                <option value="brass">Brass Instrument</option>
-                <option value="string">String Instrument</option>
-                <option value="percussion">Percussion</option>
-              </select>
-            </label>
-            <br/>
-            <label for="genre">
-              Choose a genres:
-              <select
-                id="genre"
-                name="genre"
-                onChange={handleChange}
-                multiple
-              >
-                <option value="rock">Rock</option>
-                <option value="punk">Punk</option>
-                <option value="metal">Metal</option>
-                <option value="hipHop">Hip-Hop</option>
-                <option value="country">Country</option>
-                <option value="soul">Soul</option>
-                <option value="electronic">Electronic</option>
-                <option value="pop">Pop</option>
-                <option value="rnb">RnB / Neo-Soul</option>
-                <option value="reggae">Reggaeton</option>
-                <option value="folk">Folk</option>
-              </select>
-            </label>
-            <br/>
-            <label for="skill">
-              Skill level:
+              <label for="instruments">
+                Choose an instrument:
+                <select
+                  id="instruments"
+                  name="instruments"
+                  onChange={handleChange}
+                  multiple
+                  className="loginFields"
+                >
+                  <option value="vocals">Vocals</option>
+                  <option value="guitar">Guitar</option>
+                  <option value="bass">Bass</option>
+                  <option value="drum">Drums</option>
+                  <option value="piano">Piano</option>
+                  <option value="synth">Keyboard / Synth</option>
+                  <option value="drumMachine">Drum Machine</option>
+                  <option value="brass">Brass Instrument</option>
+                  <option value="string">String Instrument</option>
+                  <option value="percussion">Percussion</option>
+                </select>
+              </label>
+              <label for="genre">
+                Choose a genre:
+                <select
+                  id="genre"
+                  name="genre"
+                  onChange={handleChange}
+                  multiple
+                  className="loginFields"
+                >
+                  <option value="rock">Rock</option>
+                  <option value="punk">Punk</option>
+                  <option value="metal">Metal</option>
+                  <option value="hipHop">Hip-Hop</option>
+                  <option value="country">Country</option>
+                  <option value="soul">Soul</option>
+                  <option value="electronic">Electronic</option>
+                  <option value="pop">Pop</option>
+                  <option value="rnb">RnB / Neo-Soul</option>
+                  <option value="reggae">Reggaeton</option>
+                  <option value="folk">Folk</option>
+                </select>
+              </label>
               <select
                 id="skill"
                 name="skill"
                 onChange={handleChange}
+                className="loginFields"
               >
+                <option selected>How hard can you shred?</option>
                 <option value="amateur">Amateur</option>
                 <option value="professional">Professional</option>
               </select>
-            </label>
-            <br/>
-            <label>
-              Location:
               <input
+                className="loginFields"
                 type="text"
                 name="location"
-                placeholder="Your own private Idaho"
+                placeholder="Location, location, location"
                 onChange={handleChange}
               />
-            </label>
-            <br/>
-            <label for="age">
-              Age:
               <select
                 id="age"
                 name="age"
                 onChange={handleChange}
+                className="loginFields"
               >
+                <option placeholder>Pick an age</option>
                 {AGES.map(age => (
                   <option value={age}>{age}</option>
                 ))}
               </select>
-            </label>
-            <br/>
-            <input type="submit" value="Sign Up" />
-          </form>
-        </label>
+              <input type="submit" value="Sign Up" />
+            </form>
+          </label>
+        </div>
       </div>
-    </>
+    </div>
   )
 };
 

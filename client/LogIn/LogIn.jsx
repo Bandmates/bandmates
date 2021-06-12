@@ -13,41 +13,44 @@ const LogIn = () => {
   };
 
   return (
-    <>
-      {errors && (
-        <div>
-          {errors}
-        </div>
-      )}
-      <label>
-        Log in
+    <div className="signUpAndLogIn">
+      <div id="signUpContainer">
+        <h1>Bandmates</h1>
+        {errors && (
+          <div className="loginFields">
+            {errors}
+          </div>
+        )}
         <form
           onSubmit={handleLogIn}>
           <input
+            className="loginFields"
             type="text"
             id="username"
             name="username"
             placeholder="kenny@loggins.com"
           />
           <input
+            className="loginFields"
             type="password"
             id="password"
             name="password"
             placeholder="SickPassword420"
           />
           <input
+            className="loginFields"
             type="submit"
             value="Log In"
           />
         </form>
-      </label>
-      <Link to="/signUp">
-        <button>
-          Don't have an account?
-          Click here to sign up.
-        </button>
-      </Link>
-    </>
+        <Link to="/signUp">
+          <button className="loginFields">
+            Don't have an account?
+            Click here to sign up.
+          </button>
+        </Link>
+      </div>
+    </div>
   )
 };
 
