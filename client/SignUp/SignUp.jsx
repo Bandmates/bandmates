@@ -6,6 +6,8 @@ for (let i = 18; i < 100; i++) {
   AGES.push(i);
 }
 
+//TODO: figure out how to select multiple values and store them in state
+//! https://stackoverflow.com/questions/30190588/html-select-multiple-as-dropdown
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,10 +32,9 @@ const SignUp = () => {
 
   const handleChange = e => {
     e.preventDefault();
-    console.log(e.target);
-    const { name, target } = e.target.value;
+    let { name, value } = e.target;
     const updateState = labelToSetState[name];
-    updateState(target);
+    updateState(value);
   };
 
   const handleSubmit = e => {
