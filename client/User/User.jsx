@@ -1,9 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const User = () => (
-  <>
-    <h2>User</h2>
-  </>
-);
+const User = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    //!TODO: hook up fetch once everything is set up
+    // fetch('/users/:id')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     setUser(data);
+    //   });
+  }, []);
+
+  if (!user) {
+    return (
+      <div>
+        Loading user ...
+      </div>
+    )
+  }
+
+  const {
+    username,
+    email,
+    instruments,
+    genres,
+    gender,
+    age,
+    location,
+    bio,
+    skillLevel,
+  } = user;
+
+  return (
+    <>
+      <div>{username}</div>
+      <div>{instruments}</div>
+      <div>{genres}</div>
+      <div>{skillLevel}</div>
+      <div>{age} years old, {gender}, located in {location}</div>
+      <div>{bio}</div>
+      <div>{email}</div>
+    </>
+  )
+};
 
 export default User;
