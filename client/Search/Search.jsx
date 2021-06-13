@@ -10,11 +10,13 @@ const Search = () => {
   const [skill, setSkill] = useState('amateur');
   const [location, setLocation] = useState('');
   const [shouldExcludeMen, setShouldExcludeMen] = useState(false);
+  const [initialResults, setInitialResults] = useState(null);
 
   useEffect(() => {
     fetch('/api/users')
       .then(res => res.json())
       .then(({ users }) => {
+        setInitialResults(users);
         setSearchResults(users);
       })
       .catch(err => console.log(err));
@@ -36,7 +38,6 @@ const Search = () => {
 
     const updateState = labelToSetState[name];
     updateState(value);
-    console.log(name, value);
   };
 
   const handleSearch = e => {
@@ -49,12 +50,18 @@ const Search = () => {
       location,
       shouldExcludeMen,
     };
+    debugger
+    const filteredResults = initialResults.filter(result => {
+      return result.instruments.toLowerCase() === instrument &&
+        result.genres.toLowerCase() === genre &&
+        result.skill_level.toLowerCase() === skill;
+    });
+    setSearchResults(filteredResults);
+  };
 
-    //TODO: add query string to fetch, connect query to backend
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(data => setSearchResults(data))
-    //   .catch(err => console.log(err));
+  const handleReset = e => {
+    e.preventDefault();
+    setSearchResults(initialResults);
   };
 
   //TODO: fix checkbox input
@@ -65,7 +72,7 @@ const Search = () => {
       <div id="searchForm">
         <label>
           Search for musicians with whom to jam
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} onReset={handleReset}>
             <label for="instruments">Choose an instrument:
               <select
                 id="instruments"
@@ -130,6 +137,7 @@ const Search = () => {
               />
             </label><br/>
             <input type="submit" value="Search" />
+            <input type="reset" value="Reset" />
           </form>
         </label>
       </div>

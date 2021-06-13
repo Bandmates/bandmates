@@ -63,7 +63,7 @@ const SignUp = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(res => {
+    }).then(() => {
       setDidSignUp(true);
     }).catch(err => setErrors(err));
   };
