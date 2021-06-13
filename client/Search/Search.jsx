@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SearchResult from './SearchResult';
 import NavBar from '../NavBar/NavBar';
@@ -10,6 +10,15 @@ const Search = () => {
   const [skill, setSkill] = useState('amateur');
   const [location, setLocation] = useState('');
   const [shouldExcludeMen, setShouldExcludeMen] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/users')
+      .then(res => res.json())
+      .then(({ users }) => {
+        setSearchResults(users);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const labelToSetState = {
     instruments: setInstrument,

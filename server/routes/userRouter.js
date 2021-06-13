@@ -3,7 +3,7 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/users',
+router.get('/api/users',
   userController.viewUsers,
   (req, res, next) => {
     try {
@@ -13,7 +13,7 @@ router.get('/users',
     }
   });
 
-router.get('/users/:id',
+router.get('/api/users/:id',
   userController.findUser,
   (req, res, next) => {
     try {
@@ -23,7 +23,7 @@ router.get('/users/:id',
     }
   });
 
-router.post('/users',
+router.post('/api/users',
   userController.createUser,
   (req, res, next) => {
     try {
@@ -33,7 +33,7 @@ router.post('/users',
     }
   });
 
-router.delete('/users',
+router.delete('/api/users',
   userController.deleteUser,
   (req, res, next) => {
     try {
