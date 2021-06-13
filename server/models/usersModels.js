@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
-// TODO: change PG URI
-const PG_URI = 'hotandhornypeople.com';
+// TODO: change PG URI 
+const PG_URI = process.env.PG_URI;
 
 // create a new pool here using the connection string above
 const pool = new Pool({

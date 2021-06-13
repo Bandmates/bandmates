@@ -4,12 +4,16 @@ const db = require('../models/usersModels'); //we don't know what this will be y
 const userController = {};
 
 userController.createUser = async (req, res, next) => {
-  // req.body = { name: 'Tuler', email: 'tyler@tuler.com',  }
-  // const name = req.body.name
-  // const username = req.body.username
-  // console.log('this is the req.body', req.body);
-  // 
-  const { name, username, password_digest, email, gender, birthdate, skill_level, bio } = req.body;
+  const {
+    name,
+    username,
+    password_digest,
+    email,
+    gender,
+    birthdate,
+    skill_level,
+    bio,
+  } = req.body;
 
   const createUserQuery = `
     INSERT INTO users (name, username, password_digest, email, gender, birthdate, skill_level, bio)

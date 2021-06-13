@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 const AGES = [];
 
@@ -19,6 +20,8 @@ const SignUp = () => {
   const [location, setLocation] = useState('');
   const [shouldExcludeMen, setShouldExcludeMen] = useState(false);
   const [errors, setErrors] = useState('');
+  const [email, setEmail] = useState('');
+  const [didSignUp, setDidSignUp] = useState(false);
 
   const labelToSetState = {
     username: setUsername,
@@ -29,6 +32,7 @@ const SignUp = () => {
     skill: setSkill,
     gender: setShouldExcludeMen,
     location: setLocation,
+    email: setEmail,
   };
 
   const handleChange = e => {
@@ -43,22 +47,30 @@ const SignUp = () => {
 
     const user = {
       username,
+      email,
       password,
       age,
       instrument,
       genre,
       skill,
       location,
-      shouldExcludeMen,
     };
 
     //TODO: make a post request to create user
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(data => setSearchResults(data))
-    //   .catch(err => setErrors(err));
+    fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => {
+      setDidSignUp(true);
+    }).catch(err => setErrors(err));
   };
 
+  let history = useHistory();
+  if (didSignUp) history.push('/users');
+  
   return (
     <div className="signUpAndLogIn">
       <div id="signUpContainer">
@@ -87,8 +99,8 @@ const SignUp = () => {
               <input
                 className="loginFields"
                 type="text"
-                id="gmail"
-                name="gmail"
+                id="email"
+                name="email"
                 placeholder="kenny@loggins.com"
                 onChange={handleChange}
               />
