@@ -2,8 +2,9 @@
   "name": "bandmates",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "server/server.js",
   "scripts": {
+    "testBE": "nodemon ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/davidzhangnyc/bandmates#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -34,6 +36,7 @@
     "html-webpack-plugin": "^5.3.1",
     "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
+    "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
     "webpack-hot-middleware": "^2.25.0"
