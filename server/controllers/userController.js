@@ -67,11 +67,6 @@ userController.viewUsers = async (req, res, next) => {
     INNER JOIN genre ON genre._id = users_genres.genre_id
   `;
 
-  //! TODO: currently, we are getting multiple entries per user.
-  //! This is because of our joins table. We need to combine
-  //! genre and instrument information so that users with
-  //! many instruments and many genres don't appear multiple times.
-
   // This is getting a table showing all the users and the instruments and genres they like
   // select users.*, instruments.instrument_name as instruments, genre.genre_name as genres  from users inner join users_instruments on users._id = users_instruments.user_id inner join instruments on instruments._id =
   //   users_instruments.instrument_id INNER JOIN users_genres on users._id = users_genres.user_id INNER JOIN genre on genre._id = users_genres.genre_id
@@ -80,8 +75,33 @@ userController.viewUsers = async (req, res, next) => {
   //   users_instruments.instrument_id INNER JOIN users_genres on users._id = users_genres.user_id INNER JOIN genre on genre._id = users_genres.genre_id
   try {
     const users = await db.query(viewUsers);
-    res.locals.users = users.rows;
+    const rows = users.rows;
+    const builtUsers = new Set();
 
+    const formattedUsers = rows.reduce((acc, user) => {
+      if (builtUsers.has(user.username)) {
+        const filteredUser = acc.filter(u => u.username === user.username)[0];
+        const uniqueGenres = [...new Set([...filteredUser.genres, user.genres])];
+        const uniqueInstruments = [...new Set([...filteredUser.instruments, user.instruments])];
+
+        filteredUser.instruments = uniqueInstruments;
+        filteredUser.genres = uniqueGenres;
+      } else {
+        builtUsers.add(user.username);
+
+        const newUser = {
+          ...user,
+          instruments: [user.instruments],
+          genres: [user.genres],
+        };
+
+        acc.push(newUser);
+      }
+
+      return acc;
+    }, []);
+    
+    res.locals.users = formattedUsers;
     return next();
   } catch (error) {
     return next({
