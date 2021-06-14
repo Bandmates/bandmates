@@ -48,12 +48,8 @@ module.exports = {
     historyApiFallback: true,
     host: 'localhost',
     port: 8080,
-  //   hot: true,
-  //   publicPath: '/',
     proxy: {
       '/api/users': 'http://localhost:3000',
-      // '/messages': 'http://localhost:3000',
-      // '/**': 'http://localhost:3000',
     },
   },
 };

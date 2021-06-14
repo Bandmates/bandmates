@@ -10,13 +10,13 @@ app.use(express.urlencoded({ extended: false }));
 
 const userRouter = require('./routes/userRouter');
 
-app.use('/', userRouter);
+app.use('/api/users', userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
-module.exports = app;
+//! TODO: ADD CATCH ROUTE FOR NON-SPECIFIED ROUTES
+//! TODO: ADD ERROR HANDLER
 
-//notes:
-//we will need to create a connection to the sequel database in this file as well
+module.exports = app;
