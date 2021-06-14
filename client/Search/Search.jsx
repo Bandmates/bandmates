@@ -163,13 +163,14 @@ const Search = () => {
           {...result}
         />
       ))}
-      {initialResults ? (
+      {(initialResults && !searchResults) && (
         <div>
           No musicians found based on your criteria. Bummer!
         </div>
-      ) : (
+      )}
+      {!initialResults && (
         <div>
-          Loading musicians ...
+          Loading musicians, please wait ...
         </div>
       )}
     </>
