@@ -34,7 +34,7 @@ const SearchResult = ({
   const formattedGenres = genres.join(", ");
 
   return (
-    <div>
+    <div className="searchResult">
       <div>Name: {name}</div>
       <div>Location: {location}</div>
       <div>Skill level: {skillLevel}</div>
