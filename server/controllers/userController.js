@@ -1,10 +1,34 @@
-const db = require('../models/usersModels'); //we don't know what this will be yet, update later
-//should we connect to the server in this file as well? follow up on this
+const db = require('../models/usersModels');
 
 const userController = {};
 
+//! TODO: are we actually creating the user with this query?
+//! There seems to be no change the users when running 
+//! GET requests to /users
 userController.createUser = async (req, res, next) => {
   const {
+    name,
+    username,
+    password: password_digest,
+    email,
+    gender,
+    birthdate,
+    skill: skill_level,
+    bio,
+    location,
+    genres,
+    instruments,
+  } = req.body;
+
+  const createUserQuery = `
+    INSERT INTO users (name, username, password_digest, email, gender, birthdate, skill_level, bio, location)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *
+  `;
+
+  //! TODO: we are currently storing passwords directly into the DB. 
+  //! We need to use Bcrypt to encrypt our users' passwords.
+  const params = [
     name,
     username,
     password_digest,
@@ -13,27 +37,18 @@ userController.createUser = async (req, res, next) => {
     birthdate,
     skill_level,
     bio,
-  } = req.body;
+    location
+  ];
 
-  const createUserQuery = `
-    INSERT INTO users (name, username, password_digest, email, gender, birthdate, skill_level, bio)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    RETURNING *
-  `;
-  const params = [name, username, password_digest, email, gender, birthdate, skill_level, bio];
-
-  //save our join or selection into a variable, inserting in our case
   try {
-    //how should we create a new user, is it a class we set up somewhere?
     const user = await db.query(createUserQuery, params);
-    // db.query(createUserQuery, params, function (ar1, arg2) {
-    //   console.log(ar1);
-    //   console.log(arg2);
-    // });
-    console.log(user);
+
+    //! TODO: currently, when we create a user, we are not storing their
+    //! instrument or genre information anywhere. We need to update
+    //! the joins tables to save that information about a new user. 
+
     res.locals.user = user.rows[0];
     return next();
-    //what should we be sending back to the front end? this will be parsed with json in the router file
   } catch (error) {
     return next({
       error: `userController.createUser; ERROR: ${error} `,
@@ -43,17 +58,19 @@ userController.createUser = async (req, res, next) => {
 };
 
 userController.viewUsers = async (req, res, next) => {
-
   // find all instruments and genres played and preferred by a specific user id in the intermediary tables
   const viewUsers = `
-  select users.*, instruments.instrument_name as instruments, genre.genre_name as genres from users
-  INNER JOIN users_instruments on users._id = users_instruments.user_id
-  INNER JOIN instruments on instruments._id = users_instruments.instrument_id
-  INNER JOIN users_genres on users._id = users_genres.user_id
-  INNER JOIN genre on genre._id = users_genres.genre_id
-    `;
+    SELECT users.*, instruments.instrument_name as instruments, genre.genre_name as genres FROM users
+    INNER JOIN users_instruments ON users._id = users_instruments.user_id
+    INNER JOIN instruments ON instruments._id = users_instruments.instrument_id
+    INNER JOIN users_genres ON users._id = users_genres.user_id
+    INNER JOIN genre ON genre._id = users_genres.genre_id
+  `;
 
-
+  //! TODO: currently, we are getting multiple entries per user.
+  //! This is because of our joins table. We need to combine
+  //! genre and instrument information so that users with
+  //! many instruments and many genres don't appear multiple times.
 
   // This is getting a table showing all the users and the instruments and genres they like
   // select users.*, instruments.instrument_name as instruments, genre.genre_name as genres  from users inner join users_instruments on users._id = users_instruments.user_id inner join instruments on instruments._id =
@@ -62,10 +79,9 @@ userController.viewUsers = async (req, res, next) => {
   // select users.*, instruments.instrument_name as instruments, genre.genre_name as genres  from users inner join users_instruments on users._id = users_instruments.user_id inner join instruments on instruments._id =
   //   users_instruments.instrument_id INNER JOIN users_genres on users._id = users_genres.user_id INNER JOIN genre on genre._id = users_genres.genre_id
   try {
-    //access Users via sql query
     const users = await db.query(viewUsers);
-    console.log(users.rows);
-    res.locals.users = users.rows; // an array of user objects
+    res.locals.users = users.rows;
+
     return next();
   } catch (error) {
     return next({
@@ -75,10 +91,11 @@ userController.viewUsers = async (req, res, next) => {
   }
 };
 
+//TODO: this middleware will find one user based on that user's ID. 
 userController.findUser = async (req, res, next) => {
   try {
-    const findUser = //some selection
-      res.locals.user = await db.query(findUser); //.rows[0]; //let's look in the user router file now and 
+    const findUser; //some selection
+    res.locals.user = await db.query(findUser); //.rows[0]; //let's look in the user router file now and 
     return next();
   } catch (error) {
     return next({
@@ -88,18 +105,11 @@ userController.findUser = async (req, res, next) => {
   }
 };
 
-//user is the primary key 
-//the foreign key connects the user to the instrument and user to the genre
-//can search for an instrument and a genre
-
-// userController.matchUser = (req, res, err) {
-
-// }
-
-
+//TODO: this middleware will find one user based on that user's ID,
+// and update based on the body. 
 userController.updateUser = async (req, res, next) => {
   try {
-    const updateUser = //some selection
+    const updateUser; //some selection
       // res.locals.message = await db.query(updateUser);
       res.locals.user = await db.query(updateUser);
   } catch (error) {
@@ -110,10 +120,12 @@ userController.updateUser = async (req, res, next) => {
   }
 };
 
+//TODO: this middleware will find one user and delete them
+// from the database. 
 userController.deleteUser = async (req, res, next) => {
   try {
-    const deleteUser = //some selection
-      await db.query(deleteUser);
+    const deleteUser; //some selection
+    await db.query(deleteUser);
     res.locals.message = 'User has been deleted'; //.rows[0]; 
     return next();
   } catch (error) {
