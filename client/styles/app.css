@@ -94,6 +94,9 @@ h1 {
   position: relative;
   top: 40vh; */
   /* background-image: url("https://wallpaperaccess.com/full/2116674.jpg"); */
+
+  /* TODO: COMMENTS LINE 99 BACK IN TO SHOW BACKGROUND IMAGE ON SIGN IN PAGE */
+
   background-image: url("https://giffiles.alphacoders.com/524/52425.gif");
   /* background-image: url("https://wallpaperaccess.com/full/1323873.jpg"); */
   background-size: cover;
@@ -141,4 +144,85 @@ button {
 
 form > label {
   color: #767676;
+}
+
+/* STYLING FOR THE /USERS PAGE */
+
+.searchResultsContainer {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  margin: 10px; 
+}
+
+.searchResult {
+  display: inline-block; 
+  flex-direction: column;
+  margin: 10px; 
+  padding: 15px; 
+  background-color: rgba(255,255,255, 0.9);
+  border: 2.5px transparent rgb(0, 0, 0);
+  border-radius: 5px;
+  width: 20%;
+}
+
+.searchResult button {
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  color: #767676;
+}
+
+.searchResult button:hover {
+  cursor: pointer;
+  color: #78c0b6; 
+  background-color: white;
+  transition: .5s;
+}
+
+.searchResult:hover {
+  border: 2.5px solid rgb(160, 160, 160);
+  box-shadow: 0px 15px 20px rgba(73, 73, 73, 0.4);
+  transform: translateY(-7px);
+  cursor: pointer; 
+}
+
+#searchForm { 
+  display: flex; 
+  flex-direction: column;
+  margin: 0px 0px 10px 165px; 
+  padding: 15px; 
+  background-color: rgba(255,255,255, 0.9);
+  border: 2.5px transparent rgb(0, 0, 0);
+  border-radius: 5px;
+  width: 40.75%
+}
+
+.searchButtons {
+  margin-right: 10px;
+}
+
+.searchButtons:hover {
+  cursor: pointer;
+  color: #78c0b6; 
+  background-color: white;
+  transition: .5s;
+}
+
+.usersPage {
+  background-image: url("https://giffiles.alphacoders.com/524/52425.gif"); 
+  /* opacity:;  */
+  /* background-color: #baeee6; */
+  background-size: cover;
+  height: 100vh;
+  width: 100vw; 
+}
+
+.usersPageLinks {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.redirect {
+  margin: 10px 165px; 
 }
