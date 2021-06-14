@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Redirect } from 'react-router';
-
-const AGES = [];
-
-for (let i = 18; i < 100; i++) {
-  AGES.push(i);
-}
 
 //TODO: figure out how to select multiple values and store them in state
+// Because of this issue, right now a user signing up via our sign up
+// form can only select one instrument and one genre. 
 //! https://stackoverflow.com/questions/30190588/html-select-multiple-as-dropdown
 const SignUp = () => {
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [age, setAge] = useState(18);
-  const [instrument, setInstrument] = useState('vocals');
-  const [genre, setGenre] = useState('rock');
+  const [birthdate, setBirthdate] = useState('');
+  const [instruments, setInstrument] = useState('vocals');
+  const [genres, setGenre] = useState('rock');
   const [skill, setSkill] = useState('amateur');
   const [location, setLocation] = useState('');
-  const [shouldExcludeMen, setShouldExcludeMen] = useState(false);
+  const [gender, setGender] = useState('Woman');
   const [errors, setErrors] = useState('');
   const [email, setEmail] = useState('');
   const [didSignUp, setDidSignUp] = useState(false);
@@ -26,13 +22,14 @@ const SignUp = () => {
   const labelToSetState = {
     username: setUsername,
     password: setPassword,
-    age: setAge,
+    birthdate: setBirthdate,
     instruments: setInstrument,
-    genre: setGenre,
+    genres: setGenre,
     skill: setSkill,
-    gender: setShouldExcludeMen,
     location: setLocation,
     email: setEmail,
+    gender: setGender,
+    name: setName,
   };
 
   const handleChange = e => {
@@ -46,17 +43,18 @@ const SignUp = () => {
     e.preventDefault();
 
     const user = {
+      name,
       username,
       email,
       password,
-      age,
-      instrument,
-      genre,
+      instruments,
+      genres,
       skill,
       location,
+      birthdate,
+      gender,
     };
 
-    //TODO: make a post request to create user
     fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -68,6 +66,8 @@ const SignUp = () => {
     }).catch(err => setErrors(err));
   };
 
+  // This logic is redirecting to the Search component
+  // when someone logs in. 
   let history = useHistory();
   if (didSignUp) history.push('/users');
   
@@ -88,6 +88,14 @@ const SignUp = () => {
         <div id="signUpForm">
           <label>
             <form onSubmit={handleSubmit}>
+              <input
+                className="loginFields"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Craig Finn"
+                onChange={handleChange}
+              />
               <input
                 className="loginFields"
                 type="text"
@@ -165,6 +173,17 @@ const SignUp = () => {
                 <option value="amateur">Amateur</option>
                 <option value="professional">Professional</option>
               </select>
+              <select
+                id="gender"
+                name="gender"
+                onChange={handleChange}
+                className="loginFields"
+              >
+                <option selected>Pick a gender</option>
+                <option value="Woman">Woman</option>
+                <option value="Man">Man</option>
+                <option value="Non-binary">Non-binary</option>
+              </select>
               <input
                 className="loginFields"
                 type="text"
@@ -172,17 +191,13 @@ const SignUp = () => {
                 placeholder="Location, location, location"
                 onChange={handleChange}
               />
-              <select
-                id="age"
-                name="age"
-                onChange={handleChange}
+              <input
                 className="loginFields"
-              >
-                <option placeholder>Pick an age</option>
-                {AGES.map(age => (
-                  <option value={age}>{age}</option>
-                ))}
-              </select>
+                type="text"
+                name="birthdate"
+                placeholder="1979-08-31"
+                onChange={handleChange}
+              />
               <input type="submit" value="Sign Up" />
             </form>
           </label>
