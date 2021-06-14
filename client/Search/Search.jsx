@@ -72,8 +72,11 @@ const Search = () => {
         return false;
       }
 
-      return instruments.toLowerCase() === instrument &&
-        userGenres.toLowerCase() === genre &&
+      const mappedGenres = userGenres.map(g => g.toLowerCase());
+      const mappedInstruments = instruments.map(i => i.toLowerCase());
+
+      return mappedInstruments.includes(instrument) &&
+        mappedGenres.includes(genre) &&
         userSkillLevel.toLowerCase() === skill;
         // && userLocation.toLowerCase().contains(location.toLowerCase)
     });
@@ -108,10 +111,10 @@ const Search = () => {
                 <option value="bass">Bass</option>
                 <option value="drum">Drums</option>
                 <option value="piano">Piano</option>
-                <option value="synth">Keyboard / Synth</option>
-                <option value="drumMachine">Drum Machine</option>
-                <option value="brass">Brass Instrument</option>
-                <option value="string">String Instrument</option>
+                <option value="keyboard / synth">Keyboard / Synth</option>
+                <option value="drum machine">Drum Machine</option>
+                <option value="brass instrument">Brass Instrument</option>
+                <option value="string instrument">String Instrument</option>
                 <option value="percussion">Percussion</option>
               </select>
             </label><br/>
