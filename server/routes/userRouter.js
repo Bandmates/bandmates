@@ -3,7 +3,12 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/api/users',
+//! TODO: Will there ever be an error at the end of all the middleware?
+//! Check if try/catches in this file are actually needed. 
+
+// Get all users
+router.get(
+  '/',
   userController.viewUsers,
   (req, res, next) => {
     try {
@@ -11,19 +16,12 @@ router.get('/api/users',
     } catch (error) {
       next(error);
     }
-  });
+  }
+);
 
-router.get('/api/users/:id',
-  userController.findUser,
-  (req, res, next) => {
-    try {
-      res.status(200).json(res.locals.user);
-    } catch (error) {
-      next(error);
-    }
-  });
-
-router.post('/api/users',
+// Create a user
+router.post(
+  '/',
   userController.createUser,
   (req, res, next) => {
     try {
@@ -31,31 +29,46 @@ router.post('/api/users',
     } catch (error) {
       next(error);
     }
-  });
+  }
+);
 
-router.delete('/api/users',
-  userController.deleteUser,
+// Get one user
+router.get(
+  '/:id',
+  userController.findUser,
   (req, res, next) => {
     try {
-      res.status(200).json(res.locals.message);
+      res.status(200).json(res.locals.user);
     } catch (error) {
       next(error);
     }
-  });
+  }
+);
 
+// Delete a user
+router.delete(
+  '/:id',
+  userController.deleteUser,
+  (req, res, next) => {
+    try {
+      res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-// router.put('/',
-//   userController.updateUser,
-//   (req, res, next) => {
-//     try {
-
-//     } catch (error) {
-
-//     }
-//   }
-// );
-
-
-//create a gloabal catch here? check other examples, but a global catch should be somewhere to catch all errors 
+// Update a user
+router.patch(
+  '/:id',
+  userController.updateUser,
+  (req, res, next) => {
+    try {
+      res.status(200).json(res.locals.user);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

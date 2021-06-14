@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import NavBar from '../NavBar/NavBar';
 
-const User = ({ id }) => {
+const User = () => {
   const [user, setUser] = useState(null);
+  
+  // TODO: there's probably a better way to get a user's ID from ReactRouterDom.
+  const history = useHistory();
+  const userId = history.location.pathname.split('/users/');
 
-  useEffect(() => {
-    //!TODO: hook up fetch once everything is set up
-    // fetch('/users/:id')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     setUser(data);
-    //   });
-  }, []);
+  // TODO: in the future, user information should be fetched from 
+  // backend via a get request to /api/users/:id
+  // useEffect(() => {
+  //   fetch(`/api/users/${ userId }`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setUser(data);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
 
   if (!user) {
     return (
@@ -26,24 +33,33 @@ const User = ({ id }) => {
   }
 
   const {
+    name,
     username,
     email,
     instruments,
     genres,
     gender,
-    age,
+    birthdate,
     location,
     bio,
-    skillLevel,
+    skill_level: skillLevel,
   } = user;
+  
+  // TODO: use birthdate to format age.
+  const age = birthdate;
+  
+  // TODO: format genres and instruments from arrays to strings
+  // (once the backend is serving up arrays)
+  const formattedInstruments = instruments;
+  const formattedGenres = genres;
 
   return (
     <>
       <NavBar />
-      <h1>USER PROFILE</h1>
+      <div>{name}</div>
       <div>{username}</div>
-      <div>{instruments}</div>
-      <div>{genres}</div>
+      <div>{formattedInstruments}</div>
+      <div>{formattedGenres}</div>
       <div>{skillLevel}</div>
       <div>{age} years old, {gender}, located in {location}</div>
       <div>{bio}</div>
