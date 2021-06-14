@@ -6,21 +6,20 @@ import { Link } from 'react-router-dom';
 // to Link the user to their profile. This will be 
 // accomplished with Redux and Auth. 
 const NavBar = () => (
-  <div>
+  <div className="usersPageLinks">
     {/* <div>
       Hello, {username}!
     </div> */}
     {/* <div>
       <Link to={`/users/${id}`}>View profile</Link>
     </div> */}
-    <div>
-      <Link to="/users">Search musicians</Link>
-    </div>
-    <div>
-      {/* TODO: clicking "Log out" should actually log a user out,
+
+    <Link to="/users" className="redirect">Search musicians</Link>
+
+    {/* TODO: clicking "Log out" should actually log a user out,
       not just redirect them to the logIn page.  */}
-      <Link to="/logIn">Log out</Link>
-    </div>
+    <Link to="/logIn" className="redirect">Log out</Link>
+
   </div>
 );
 

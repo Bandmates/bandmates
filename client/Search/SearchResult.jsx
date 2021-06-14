@@ -32,7 +32,7 @@ const SearchResult = ({
   const toggleBio = () => setIsBioShowing(!isBioShowing);
 
   return (
-    <div>
+    <div className="searchResult">
       <div>Name: {name}</div>
       <div>Location: {location}</div>
       <div>Skill level: {skillLevel}</div>

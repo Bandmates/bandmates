@@ -67,10 +67,10 @@ const Search = () => {
     }) => (
       //TODO: fix filtering
       instruments.toLowerCase() === instrument
-        // && userGenres.toLowerCase() === genre &&
-        // && userSkillLevel.toLowerCase() === skill
-        // && userLocation.toLowerCase().contains(location.toLowerCase)
-        // && (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
+      // && userGenres.toLowerCase() === genre &&
+      // && userSkillLevel.toLowerCase() === skill
+      // && userLocation.toLowerCase().contains(location.toLowerCase)
+      // && (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
     ));
 
     setSearchResults(filteredResults);
@@ -83,12 +83,12 @@ const Search = () => {
 
   //TODO: fix checkbox input
   return (
-    <>
+    <div className="usersPage">
       <NavBar />
-      <h2>Search</h2>
       <div id="searchForm">
+        <h2>Search</h2>
         <label>
-          Search for musicians with whom to jam
+          Search for musicians with whom to jam...
           <form onSubmit={handleSearch} onReset={handleReset}>
             <label for="instruments">Choose an instrument:
               <select
@@ -107,8 +107,8 @@ const Search = () => {
                 <option value="string">String Instrument</option>
                 <option value="percussion">Percussion</option>
               </select>
-            </label><br/>
-            <label for="genre">Choose a genres:
+            </label><br />
+            <label for="genre">Choose a genre:
               <select
                 id="genre"
                 name="genre"
@@ -126,7 +126,7 @@ const Search = () => {
                 <option value="reggae">Reggaeton</option>
                 <option value="folk">Folk</option>
               </select>
-            </label><br/>
+            </label><br />
             <label for="skill">Skill level:
               <select
                 id="skill"
@@ -136,7 +136,7 @@ const Search = () => {
                 <option value="amateur">Amateur</option>
                 <option value="professional">Professional</option>
               </select>
-            </label><br/>
+            </label><br />
             <label>Location:
               <input
                 type="text"
@@ -144,7 +144,7 @@ const Search = () => {
                 placeholder="NYC, LA, Outer space"
                 onChange={handleChange}
               />
-            </label><br/>
+            </label><br />
             <label>Only show non-men
               <input
                 type="checkbox"
@@ -152,18 +152,21 @@ const Search = () => {
                 name="gender"
                 onChange={handleChange}
               />
-            </label><br/>
-            <input type="submit" value="Search" />
-            <input type="reset" value="Reset" />
+            </label><br />
+            <input type="submit" value="Search" className="searchButtons" />
+            <input type="reset" value="Reset" className="searchButtons" />
           </form>
         </label>
       </div>
-      {searchResults.map((result, i) => (
-        <SearchResult
-          key={`searchResult${i}`}
-          {...result}
-        />
-      ))}
+      <div className="searchResultsContainer">
+        {searchResults.map((result, i) => (
+          <SearchResult
+            key={`searchResult${i}`}
+            {...result}
+
+          />
+        ))}
+      </div>
       {(initialResults && !searchResults) && (
         <div>
           No musicians found based on your criteria. Bummer!
@@ -174,8 +177,10 @@ const Search = () => {
           Loading musicians, please wait ...
         </div>
       )}
-    </>
+    </div>
+
   )
+
 };
 
 export default Search;
