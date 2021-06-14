@@ -30,14 +30,16 @@ const SearchResult = ({
 }) => {
   const [isBioShowing, setIsBioShowing] = useState(false);
   const toggleBio = () => setIsBioShowing(!isBioShowing);
+  const formattedInstruments = instruments.join(", ");
+  const formattedGenres = genres.join(", ");
 
   return (
     <div>
       <div>Name: {name}</div>
       <div>Location: {location}</div>
       <div>Skill level: {skillLevel}</div>
-      <div>Instruments: {instruments}</div>
-      <div>Genres: {genres}</div>
+      <div>Instruments: {formattedInstruments}</div>
+      <div>Genres: {formattedGenres}</div>
       <div>Gender: {gender}</div>
       {isBioShowing && (
         <>
