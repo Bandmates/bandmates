@@ -9,7 +9,8 @@ const LogIn = () => {
     const password = e.target.password.value;
     console.log(username, password);
     // TODO: do some sort of put request with the username and password to start a session. 
-    // fetch();
+    // fetch()
+      // .catch(err => setErrors(err));
   };
 
   return (
