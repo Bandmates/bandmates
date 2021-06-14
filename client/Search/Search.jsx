@@ -58,19 +58,20 @@ const Search = () => {
   const handleSearch = e => {
     e.preventDefault();
 
-    const filters = {
-      instrument,
-      genre,
-      skill,
-      location,
-      shouldExcludeMen,
-    };
+    const filteredResults = initialResults.filter(({
+      instruments,
+      skill_level: userSkillLevel,
+      location: userLocation,
+      gender: userGender,
+      genres: userGenres,
+    }) => (
+      instruments.toLowerCase() === instrument &&
+        userGenres.toLowerCase() === genre &&
+        userSkillLevel.toLowerCase() === skill &&
+        userLocation.toLowerCase().contains(location.toLowerCase) && 
+        (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
+    ));
 
-    const filteredResults = initialResults.filter(result => {
-      return result.instruments.toLowerCase() === instrument &&
-        result.genres.toLowerCase() === genre &&
-        result.skill_level.toLowerCase() === skill;
-    });
     setSearchResults(filteredResults);
   };
 
@@ -156,16 +157,19 @@ const Search = () => {
           </form>
         </label>
       </div>
-      {searchResults.length ? 
-        searchResults.map((result, i) => (
-          <SearchResult
-            key={`searchResult${i}`}
-            {...result}
-          />
-        ))
-      : (
+      {searchResults.map((result, i) => (
+        <SearchResult
+          key={`searchResult${i}`}
+          {...result}
+        />
+      ))}
+      {initialResults ? (
         <div>
-          No users found who match your search. Bummer!
+          No musicians found based on your criteria. Bummer!
+        </div>
+      ) : (
+        <div>
+          Loading musicians ...
         </div>
       )}
     </>
