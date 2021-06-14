@@ -174,12 +174,12 @@ const Search = () => {
           {...result}
         />
       ))}
-      {(initialResults && !searchResults) && (
+      {(initialResults.length && !searchResults.length) && (
         <div>
           No musicians found based on your criteria. Bummer!
         </div>
       )}
-      {!initialResults && (
+      {!initialResults.length && (
         <div>
           Loading musicians, please wait ...
         </div>
