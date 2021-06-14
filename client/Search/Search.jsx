@@ -3,6 +3,21 @@ import React, { useEffect, useState } from 'react';
 import SearchResult from './SearchResult';
 import NavBar from '../NavBar/NavBar';
 
+/*
+
+This is the "naive", or quickly done, version of the 
+"search" component. An initial GET request is made 
+for all users, then users are filtered based on some
+criteria. In future iterations, it would be better
+to actually query for users from the DB based on their
+values. 
+Additionally, when a user resets the form, the values
+do not change, but the state does. This could be changed
+by directly linking the state to the display values, or
+possibly by learning more about Form's onReset. 
+
+*/
+
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [instrument, setInstrument] = useState('vocals');
@@ -50,7 +65,7 @@ const Search = () => {
       location,
       shouldExcludeMen,
     };
-    debugger
+
     const filteredResults = initialResults.filter(result => {
       return result.instruments.toLowerCase() === instrument &&
         result.genres.toLowerCase() === genre &&
