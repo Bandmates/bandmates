@@ -94,7 +94,7 @@ userController.viewUsers = async (req, res, next) => {
 //TODO: this middleware will find one user based on that user's ID. 
 userController.findUser = async (req, res, next) => {
   try {
-    const findUser; //some selection
+    const findUser = undefined; //some selection
     res.locals.user = await db.query(findUser); //.rows[0]; //let's look in the user router file now and 
     return next();
   } catch (error) {
@@ -109,7 +109,7 @@ userController.findUser = async (req, res, next) => {
 // and update based on the body. 
 userController.updateUser = async (req, res, next) => {
   try {
-    const updateUser; //some selection
+    const updateUser = undefined; //some selection
       // res.locals.message = await db.query(updateUser);
       res.locals.user = await db.query(updateUser);
   } catch (error) {
@@ -124,7 +124,7 @@ userController.updateUser = async (req, res, next) => {
 // from the database. 
 userController.deleteUser = async (req, res, next) => {
   try {
-    const deleteUser; //some selection
+    const deleteUser = undefined; //some selection
     await db.query(deleteUser);
     res.locals.message = 'User has been deleted'; //.rows[0]; 
     return next();

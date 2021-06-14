@@ -65,11 +65,12 @@ const Search = () => {
       gender: userGender,
       genres: userGenres,
     }) => (
-      instruments.toLowerCase() === instrument &&
-        userGenres.toLowerCase() === genre &&
-        userSkillLevel.toLowerCase() === skill &&
-        userLocation.toLowerCase().contains(location.toLowerCase) && 
-        (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
+      //TODO: fix filtering
+      instruments.toLowerCase() === instrument
+        // && userGenres.toLowerCase() === genre &&
+        // && userSkillLevel.toLowerCase() === skill
+        // && userLocation.toLowerCase().contains(location.toLowerCase)
+        // && (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
     ));
 
     setSearchResults(filteredResults);
