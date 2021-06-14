@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 
-// TODO: link to profile
+/*
+
+The SearchResult component receives its props from the 
+Search component. In the Search component, the user's 
+values are spread (...) into SearchResults. 
+skill_level is renamed as skillLevel to comply with
+JavaScript naming conventions. 
+The state isBioShowing is used to indicate whether or
+not additional information about a user (bio, email)
+should be shown. 
+
+FUTURE IMPLEMENTATIONS:
+- rather than display all the information about the user
+in the search result, a future implementation should
+provide a Link (via React Router) to /users/:id. 
+
+*/
+
 const SearchResult = ({
   name,
   location,
@@ -12,11 +29,8 @@ const SearchResult = ({
   gender,
 }) => {
   const [isBioShowing, setIsBioShowing] = useState(false);
+  const showOrHideBio = () => setIsBioShowing(!isBioShowing);
 
-  const showOrHideBio = () => {
-    setIsBioShowing(!isBioShowing);
-  };
-  debugger
   return (
     <div>
       <div>Name: {name}</div>
@@ -35,7 +49,9 @@ const SearchResult = ({
           </div>
         </>
       )}
-      <button onClick={showOrHideBio}>{isBioShowing ? 'Show less information' : 'Show more information'}</button>
+      <button onClick={showOrHideBio}>
+        {isBioShowing ? 'Show less information' : 'Show more information'}
+      </button>
     </div>
   )
 };
