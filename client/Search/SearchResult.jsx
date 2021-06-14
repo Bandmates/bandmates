@@ -29,7 +29,7 @@ const SearchResult = ({
   gender,
 }) => {
   const [isBioShowing, setIsBioShowing] = useState(false);
-  const showOrHideBio = () => setIsBioShowing(!isBioShowing);
+  const toggleBio = () => setIsBioShowing(!isBioShowing);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const SearchResult = ({
           </div>
         </>
       )}
-      <button onClick={showOrHideBio}>
+      <button onClick={toggleBio}>
         {isBioShowing ? 'Show less information' : 'Show more information'}
       </button>
     </div>
