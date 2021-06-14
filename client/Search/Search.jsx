@@ -64,14 +64,19 @@ const Search = () => {
       location: userLocation,
       gender: userGender,
       genres: userGenres,
-    }) => (
-      //TODO: fix filtering
-      instruments.toLowerCase() === instrument
-        // && userGenres.toLowerCase() === genre &&
-        // && userSkillLevel.toLowerCase() === skill
+    }) => {
+      //TODO: filtering only sort of work; don't stress test in public! :,(
+      //! Because no users currently have locations, we cannot search by location.
+
+      if (shouldExcludeMen && userGender.toLowerCase() === 'man') {
+        return false;
+      }
+
+      return instruments.toLowerCase() === instrument &&
+        userGenres.toLowerCase() === genre &&
+        userSkillLevel.toLowerCase() === skill;
         // && userLocation.toLowerCase().contains(location.toLowerCase)
-        // && (shouldExcludeMen ? userGender.toLowerCase() !== 'man' : true)
-    ));
+    });
 
     setSearchResults(filteredResults);
   };
@@ -81,7 +86,9 @@ const Search = () => {
     setSearchResults(initialResults);
   };
 
-  //TODO: fix checkbox input
+  //TODO: Right now, the select non-males input needs to be clicked
+  //twice to register a change. I have no idea why, and it's very annoying.
+  //Do not show this feature during the presentation. 
   return (
     <>
       <NavBar />
